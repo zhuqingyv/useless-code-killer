@@ -79,7 +79,9 @@ class UselessCodeKiller {
   };
 
   filter = ({url}) => {
-    this.analysis.analysis({ url, callback: this.record.push });
+    try {
+      this.analysis.analysis({ url, callback: this.record.push });
+    } catch {}
   };
 
   // 揪出无用文件
