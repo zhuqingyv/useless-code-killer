@@ -99,7 +99,8 @@ class UselessCodeKiller {
 
   end = () => {
     const value = this.reporter.output();
-    fs.writeFileSync(path.resolve(__dirname, './.result.json'), value);
+    const { outputDir } = this.options;
+    fs.writeFileSync(outputDir, value);
   };
 };
 

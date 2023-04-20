@@ -13,5 +13,6 @@ const killer = new UselessCodeKiller({
         debugger;
       }
     }
-  ]
+  ],
+  outputDir: path.resolve(__dirname, './result.json')
 });
