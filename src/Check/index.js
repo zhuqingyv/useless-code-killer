@@ -39,10 +39,6 @@ class Checker {
     // filter self
     if (target._url === other._url) return false;
 
-    // if (target._url === '/Users/my/my-project/useless-code-killer/example/useful.js' && other._url === '/Users/my/my-project/useless-code-killer/example/index.js') {
-    //   debugger;
-    // };
-
     const targetLocalPath = this._localPath('', target._url);
     const otherLocalPath = this._localPath('', other._url);
 
@@ -52,7 +48,7 @@ class Checker {
       // 命中alias
       if (hitAlias) {
         const fullPath = `${hitAlias}/${rest.join('/')}`;
-        const fullPathList = fullPath.replace(rootPath, '').split('/').concat(rest).filter((_) => !!_);
+        const fullPathList = fullPath.replace(rootPath, '').split('/').filter((_) => !!_);
         const isEqual = this._ifLocalPathEqual(targetLocalPath, fullPathList);
         return isEqual;
       } else {

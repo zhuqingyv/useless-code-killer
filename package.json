@@ -1,8 +1,8 @@
 {
   "name": "useless-code-killer",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
-  "main": "./src/index.js",
+  "main": "./lib/index.js",
   "scripts": {
     "dev": "node ./demo.js"
   },
@@ -18,7 +18,11 @@
   "homepage": "https://github.com/zhuqingyv/useless-code-killer#readme",
   "dependencies": {
     "@babel/parser": "^7.21.4",
+    "path": "^0.12.7",
     "progress": "^2.0.3",
     "rd": "^2.0.1"
+  },
+  "devDependencies": {
+    "webpack": "^5.80.0"
   }
 }
