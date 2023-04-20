@@ -26,10 +26,11 @@ class Analysis {
       _isEmpty: false
     };
     const fileCode = fs.readFileSync(url, { encoding: 'utf-8' });
-    const { program: {body} } = babelParser.parse(fileCode, {
+    const parse = babelParser.parse(fileCode, {
       sourceType: 'module',
       plugins: ['jsx']
     });
+    const { program: {body} } = parse;
     
     if (!body.length) {
       memo._isEmpty = true;
@@ -46,7 +47,15 @@ class Analysis {
       if (isExport) return memo._export.push(this.exportReporterData(item));
     });
 
-    callback(memo);
+    const { loader } = this;
+
+    if (!loader?.length) return callback(memo);
+
+    const newMemo = loader.reduce((pre, cur) => {
+      return cur({ memo, parse, fileCode });
+    }, memo);
+
+    callback(newMemo);
   };
 
   importReportData = (item) => {

@@ -1,6 +1,12 @@
 {
   "entry": [
     {
+      "_url": "/Users/my/my-project/useless-code-killer/demo.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
       "_url": "/Users/my/my-project/useless-code-killer/example/deepDir/index.js",
       "_import": [
         {
@@ -19,9 +25,86 @@
       ],
       "_export": [],
       "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/node_modules/@babel/parser/bin/babel-parser.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/node_modules/@babel/parser/lib/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/node_modules/rd/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/node_modules/rd/promises.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/src/Analysis/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/src/Check/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/src/FileSystem/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/src/Record/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/src/Reporter/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/src/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
     }
   ],
   "useless": [
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/example/halation/register.js",
+      "_import": [
+        {
+          "from": "./model"
+        },
+        {
+          "from": "./index"
+        }
+      ],
+      "_export": [
+        {
+          "type": "default"
+        }
+      ],
+      "_isEmpty": false
+    },
     {
       "_url": "/Users/my/my-project/useless-code-killer/example/useless.js",
       "_import": [],

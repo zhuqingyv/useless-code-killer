@@ -5,12 +5,13 @@ const Analysis = require('./Analysis/index.js');
 const Record = require('./Record/index.js');
 const Checker = require('./Check/index.js');
 const Reporter = require('./Reporter/index.js');
+const halationLoader = require('./HalationLoader/index.js');
 
 const defaultConfig = (options = {}) => {
   const rootPath = process.cwd();
   const _default = {
     includes: ['.js', '.jsx', '.ts', '.tsx'],
-    excludes: [`${rootPath}/node_modules`]
+    excludes: ['node_modules']
   };
 
   return {
@@ -24,10 +25,7 @@ class UselessCodeKiller {
   checker = new Checker();
   reporter = new Reporter();
 
-  loader = {
-    import: [],
-    export: []
-  };
+  loader = [];
 
   constructor(options) {
     this.options = defaultConfig(options);
@@ -45,20 +43,7 @@ class UselessCodeKiller {
     const { loader } = this.options;
     if (!loader?.length) return;
 
-    loader.forEach((_loader) => {
-      const { type, handle } = _loader;
-
-      switch(type) {
-        case 'import': {
-          this.loader.import.push(handle);
-          break;
-        }
-        case 'export': {
-          this.loader.export.push(handle);
-          break;
-        }
-      }
-    });
+    this.loader.push(...loader);
   };
 
   init = () => {
@@ -90,7 +75,7 @@ class UselessCodeKiller {
     const newList = this.checker.check(latestList, this.reporter.push, retry);
 
     // 说明有删减
-    if (newList.length !== latestList.length) {
+    if (newList.length !== latestList.length && this.retry) {
       // 保存
       this.record._save(newList.concat());
       this.check(true);
@@ -108,5 +93,6 @@ class UselessCodeKiller {
 
 module.exports = {
   UselessCodeKiller,
+  halationLoader,
   defaultConfig
 };

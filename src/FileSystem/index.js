@@ -7,19 +7,13 @@ class FileSystem {
     this.includes = includes;
   };
 
-  filter = (...arg) => {
-    const [,path,] = arg;
+  filter = (path) => {
     const { excludes } = this;
+    if (!excludes?.length) return true;
 
-    // Only has excludes option!
-    if (excludes?.length) {
-      const hasExcludes = excludes.find((exName) => {
-        return exName === path;
-      });
-
-      if (hasExcludes) return false;
-    };
-
+    const pathList = path.split('/');
+    const hit = pathList.some((item) => excludes.includes(item));
+    if (hit) return false;
     return true;
   };
 
@@ -33,7 +27,7 @@ class FileSystem {
       })
     };
     eachSync(dirPath, (url, status) => {
-      if (!status.isDirectory() && hit(url)) {
+      if (!status.isDirectory() && this.filter(url) && hit(url)) {
         callback({
           url,
           status
