@@ -21,6 +21,9 @@
       "_import": [
         {
           "from": "./useful"
+        },
+        {
+          "from": "alias"
         }
       ],
       "_export": [],

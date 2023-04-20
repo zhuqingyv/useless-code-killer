@@ -1,6 +1,10 @@
 const rootPath = process.cwd() + '/';
 
 class Checker {
+  constructor({ alias }) {
+    this.alias = alias;
+  };
+
   check = (list, callback, retry) => {
     this.callback = callback;
     this.retry = retry;
@@ -33,16 +37,30 @@ class Checker {
     // filter self
     if (target._url === other._url) return false;
 
+    // if (target._url === '/Users/my/my-project/useless-code-killer/example/useful.js' && other._url === '/Users/my/my-project/useless-code-killer/example/index.js') {
+    //   debugger;
+    // };
+
     const targetLocalPath = this._localPath('', target._url);
     const otherLocalPath = this._localPath('', other._url);
 
     const hasImported = other._import.find((_importItem) => {
-      const root = otherLocalPath.concat();
-      root.pop();
-      const otherFromLocalPath = root.concat(this._localPath('', _importItem.from));
-      // 路径是否相等
-      const isEqual = this._ifLocalPathEqual(targetLocalPath, this._local(otherFromLocalPath));
-      return isEqual;
+      const [firstPath, ...rest] = this._localPath('', _importItem.from);
+      const hitAlias = this.alias[firstPath]
+      // 命中alias
+      if (hitAlias) {
+        const fullPath = `${hitAlias}/${rest.join('/')}`;
+        const fullPathList = fullPath.replace(rootPath, '').split('/').concat(rest).filter((_) => !!_);
+        const isEqual = this._ifLocalPathEqual(targetLocalPath, fullPathList);
+        return isEqual;
+      } else {
+        const root = otherLocalPath.concat();
+        root.pop();
+        const otherFromLocalPath = root.concat(this._localPath('', _importItem.from));
+        // 路径是否相等
+        const isEqual = this._ifLocalPathEqual(targetLocalPath, this._local(otherFromLocalPath));
+        return isEqual;
+      };
     });
 
     return !!hasImported;
@@ -57,10 +75,9 @@ class Checker {
 
   _ifLocalPathEqual = (target, other) => {
     // 如果层级就不一样，不相等
-    if (target.length !== other.length) return false;
+    // if (target.length !== other.length) return false;
     const otherHasMinitype = this._hasMiniType(other);
     // TODO: 补全alias
-
     // 全名称情况
     if (otherHasMinitype) {
       const isFalsy = target.find((item, i) => {
@@ -125,6 +142,10 @@ class Checker {
       list.push(str);
     });
     return list;
+  };
+
+  _alias = () => {
+    const { alias } = this;
   };
 };
 

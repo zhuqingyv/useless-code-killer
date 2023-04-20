@@ -1,4 +1,4 @@
-export default function PluginComponent() {
+export default () => {
   return {
     name: 'OrderDetailCard',
     getModel: () => require('./model'),

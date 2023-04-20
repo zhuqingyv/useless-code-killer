@@ -8,10 +8,10 @@ const Reporter = require('./Reporter/index.js');
 const halationLoader = require('./HalationLoader/index.js');
 
 const defaultConfig = (options = {}) => {
-  const rootPath = process.cwd();
   const _default = {
     includes: ['.js', '.jsx', '.ts', '.tsx'],
-    excludes: ['node_modules']
+    excludes: ['node_modules'],
+    alias: {}
   };
 
   return {
@@ -22,7 +22,6 @@ const defaultConfig = (options = {}) => {
 
 class UselessCodeKiller {
   record = new Record();
-  checker = new Checker();
   reporter = new Reporter();
 
   loader = [];
@@ -55,6 +54,7 @@ class UselessCodeKiller {
     });
 
     this.analysis = new Analysis({ loader: this.loader });
+    this.checker = new Checker({ alias: this.options.alias })
   };
 
   startEach = () => {
