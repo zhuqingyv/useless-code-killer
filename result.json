@@ -84,6 +84,12 @@
       "_isEmpty": false
     },
     {
+      "_url": "/Users/my/my-project/useless-code-killer/src/RouterLoader/index.js",
+      "_import": [],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
       "_url": "/Users/my/my-project/useless-code-killer/src/index.js",
       "_import": [],
       "_export": [],
@@ -99,6 +105,23 @@
         },
         {
           "from": "./index"
+        }
+      ],
+      "_export": [
+        {
+          "type": "default"
+        }
+      ],
+      "_isEmpty": false
+    },
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/example/routes.config.js",
+      "_import": [
+        {
+          "from": "@xhs/protobuf-armor-tracker/tracker_template"
+        },
+        {
+          "from": "./routes-test"
         }
       ],
       "_export": [

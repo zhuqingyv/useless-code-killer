@@ -6,6 +6,7 @@ const Record = require('./Record/index.js');
 const Checker = require('./Check/index.js');
 const Reporter = require('./Reporter/index.js');
 const halationLoader = require('./HalationLoader/index.js');
+const routesLoader = require('./RouterLoader/index.js');
 
 const defaultConfig = (options = {}) => {
   const _default = {
@@ -94,5 +95,7 @@ class UselessCodeKiller {
 module.exports = {
   UselessCodeKiller,
   halationLoader,
+  routesLoader,
+
   defaultConfig
 };

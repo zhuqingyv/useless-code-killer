@@ -1,5 +1,5 @@
 const path = require('path');
-const { UselessCodeKiller, halationLoader } = require('./src/index.js');
+const { UselessCodeKiller, halationLoader, routesLoader } = require('./src/index.js');
 
 const killer = new UselessCodeKiller({
   dir: path.resolve(__dirname, './'),
@@ -10,7 +10,7 @@ const killer = new UselessCodeKiller({
     'alias': path.resolve(__dirname, './example/alias-test')
   },
   // type: import
-  loader: [halationLoader],
+  loader: [halationLoader, routesLoader],
   outputDir: path.resolve(__dirname, './result.json'),
   retry: false
 });
