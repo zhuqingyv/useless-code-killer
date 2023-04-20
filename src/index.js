@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+var ProgressBar = require('progress');
 const FileSystem = require('./FileSystem/index.js');
 const Analysis = require('./Analysis/index.js');
 const Record = require('./Record/index.js');
@@ -36,6 +37,7 @@ class UselessCodeKiller {
     // 开始遍历文件
     this.startEach();
     // 找出无用文件
+    console.log('开始检查无用文件!');
     this.check();
   };
 
@@ -55,26 +57,28 @@ class UselessCodeKiller {
     });
 
     this.analysis = new Analysis({ loader: this.loader });
-    this.checker = new Checker({ alias: this.options.alias })
+    this.checker = new Checker({ alias: this.options.alias, context: this })
   };
 
   startEach = () => {
+    console.log('开始搜索文件');
     const { dir } = this.options;
     this.fileSystem.eachSync(dir, this.filter);
+    console.log(`文件总数: ${this.record.currentList.length }`);
+    this.progressBar = new ProgressBar(':bar', { total: this.record.currentList.length });
     this.record.save();
   };
 
   filter = ({url}) => {
     try {
-      this.analysis.analysis({ url, callback: this.record.push });
-    } catch {}
+      this.analysis.analysis({ url, callback: this.record.push});
+    } catch {};
   };
 
   // 揪出无用文件
   check = (retry = false) => {
     const latestList = this.record.historyList[this.record.historyList.length - 1];
     const newList = this.checker.check(latestList, this.reporter.push, retry);
-
     // 说明有删减
     if (newList.length !== latestList.length && this.retry) {
       // 保存

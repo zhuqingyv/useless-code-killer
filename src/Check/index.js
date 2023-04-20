@@ -1,26 +1,28 @@
 const rootPath = process.cwd() + '/';
 
 class Checker {
-  constructor({ alias }) {
+  constructor({ alias, context }) {
     this.alias = alias;
+    this.context = context;
   };
 
   check = (list, callback, retry) => {
     this.callback = callback;
     this.retry = retry;
-    const useFullList = list.filter((item) => {
-      const isUseless = this.ifUseless({item, list});
-      if (isUseless && this.callback && this.callback instanceof Function) this.callback('useless', item);
+    const useFullList = list.filter((item, i) => {
+      this.context.progressBar.tick();
+      const isUseless = this.ifUseless({item, list}, i);
+      if (isUseless && this.callback && this.callback instanceof Function) this.callback('useless', item, i);
       return !isUseless;
     });
     return useFullList;
   };
 
-  ifUseless = ({ item, list }) => {
+  ifUseless = ({ item, list }, i) => {
     // 未输出文件直接过滤掉
     const { _export } = item;
     if (!_export?.length) {
-      if (!this.retry && this.callback && this.callback instanceof Function) this.callback('entry', item);
+      if (!this.retry && this.callback && this.callback instanceof Function) this.callback('entry', item, i);
       return false;
     };
     const useful = list.find((other) => {
