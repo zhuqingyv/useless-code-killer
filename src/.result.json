@@ -1,10 +1,20 @@
 {
   "entry": [
     {
+      "_url": "/Users/my/my-project/useless-code-killer/example/deepDir/index.js",
+      "_import": [
+        {
+          "from": "../useFulDeep"
+        }
+      ],
+      "_export": [],
+      "_isEmpty": false
+    },
+    {
       "_url": "/Users/my/my-project/useless-code-killer/example/index.js",
       "_import": [
         {
-          "from": "./useful.js"
+          "from": "./useful"
         }
       ],
       "_export": [],

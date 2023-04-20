@@ -1,1 +1,1 @@
-import useful from "./useful.js";
+import useful from "./useful";

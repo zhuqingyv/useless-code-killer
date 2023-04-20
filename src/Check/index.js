@@ -41,7 +41,7 @@ class Checker {
       root.pop();
       const otherFromLocalPath = root.concat(this._localPath('', _importItem.from));
       // 路径是否相等
-      const isEqual = this._ifLocalPathEqual(targetLocalPath, otherFromLocalPath);
+      const isEqual = this._ifLocalPathEqual(targetLocalPath, this._local(otherFromLocalPath));
       return isEqual;
     });
 
@@ -58,14 +58,73 @@ class Checker {
   _ifLocalPathEqual = (target, other) => {
     // 如果层级就不一样，不相等
     if (target.length !== other.length) return false;
-    // TODO: 补全文件类型
+    const otherHasMinitype = this._hasMiniType(other);
     // TODO: 补全alias
-    const isFalsy = target.find((item, i) => {
-      return item !== other[i];
-    });
 
+    // 全名称情况
+    if (otherHasMinitype) {
+      const isFalsy = target.find((item, i) => {
+        return item !== other[i];
+      });
+  
+      if (isFalsy) return false;
+      return true;
+    };
+
+    // 不含名称引入
+    const { name, type } = this._fileInfo(target);
+    const otherFileName = other[other.length - 1];
+
+    // 省略index 的情况
+    // import x from 'x';
+    if (name === 'index' && otherFileName !== 'index') {
+      const newOther = other.concat();
+      newOther.push(`index.${type}`);
+
+      const isFalsy = target.find((item, i) => {
+        return item !== newOther[i];
+      });
+      if (isFalsy) return false;
+      return true;
+    };
+
+    // 单纯省略index后缀
+    // import x from './index';
+    // if (name === 'index' && otherFileName === 'index') {
+      
+    // };
+    const newOther = other.concat();
+    newOther[newOther.length - 1] = `${otherFileName}.${type}`;
+    const isFalsy = target.find((item, i) => {
+      return item !== newOther[i];
+    });
     if (isFalsy) return false;
     return true;
+  };
+
+  // 是否存在文件
+  _hasMiniType = (pathList) => {
+    const latest = pathList[pathList.length - 1];
+    const [name, type] = latest.split('.');
+    return !!type
+  };
+
+  // 文件信息
+  _fileInfo = (pathList) => {
+    const latest = pathList[pathList.length - 1];
+    const [name, type] = latest.split('.');
+    return {name, type};
+  };
+
+  _local = (pathList) => {
+    const list = [];
+    pathList.forEach((str) => {
+      if (str === '..') {
+        return list.pop();
+      };
+      list.push(str);
+    });
+    return list;
   };
 };
 
