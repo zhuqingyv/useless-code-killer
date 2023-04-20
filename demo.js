@@ -3,7 +3,7 @@ const { UselessCodeKiller, halationLoader, routesLoader } = require('./src/index
 
 const killer = new UselessCodeKiller({
   dir: path.resolve(__dirname, './'),
-  excludes: [],
+  excludes: ['node_modules'],
   includes: ['.ts', '.tsx', '.js', '.jsx'],
   // 重命名
   alias: {
