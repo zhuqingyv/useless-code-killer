@@ -1,0 +1,26 @@
+{
+  "entry": [
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/example/index.js",
+      "_import": [
+        {
+          "from": "./useful.js"
+        }
+      ],
+      "_export": [],
+      "_isEmpty": false
+    }
+  ],
+  "useless": [
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/example/useless.js",
+      "_import": [],
+      "_export": [
+        {
+          "type": "default"
+        }
+      ],
+      "_isEmpty": false
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "name": "useless-code-killer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node ./demo.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuqingyv/useless-code-killer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhuqingyv/useless-code-killer/issues"
+  },
+  "homepage": "https://github.com/zhuqingyv/useless-code-killer#readme",
+  "dependencies": {
+    "@babel/parser": "^7.21.4",
+    "rd": "^2.0.1"
+  }
+}
