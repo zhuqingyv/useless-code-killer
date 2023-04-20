@@ -65,7 +65,12 @@ class UselessCodeKiller {
     const { dir } = this.options;
     this.fileSystem.eachSync(dir, this.filter);
     console.log(`文件总数: ${this.record.currentList.length }`);
-    this.progressBar = new ProgressBar(':bar', { total: this.record.currentList.length });
+    this.progressBar = new ProgressBar('  downloading [:bar] :rate/bps :percent :etas', {
+      total: this.record.currentList.length,
+      width: 20,
+      complete: '=',
+      incomplete: ' ',
+    });
     this.record.save();
   };
 
