@@ -3,7 +3,7 @@ import useful from "./useful";
 // 匹配路径
 import alias from "alias"
 // 多.情况
-import './x.x.x.x.config/x.x.x.x.config';
+import './config/sentry.config';
 // routerLoader
 const routes = [
   {
@@ -24,6 +24,7 @@ const routes = [
     },
   },
 ];
+// halation
 import register from './halation/register';
 // export * from
 export * from './a-all/a-all';

@@ -9,7 +9,7 @@ const loader = ({memo, parse, fileCode}) => {
   const pathList = _url.split('/');
   const latest = pathList[pathList.length - 1];
 
-  if (latest.includes('route') && latest.includes('config')) {
+  try {
     const { body } = parse.program;
     body.forEach((item) => {
       const { type } = item;
@@ -37,10 +37,8 @@ const loader = ({memo, parse, fileCode}) => {
           }
         } catch {}
       };
-
-      if (type === 'ExportDefaultDeclaration') {}
     });
-  };
+  } catch {};
   return memo;
 };
 

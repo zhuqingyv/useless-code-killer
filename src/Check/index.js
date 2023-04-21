@@ -48,6 +48,7 @@ class Checker {
     // if (target._url === '/Users/my/my-project/useless-code-killer/example/halation/halationState.ts' && other._url === '/Users/my/my-project/useless-code-killer/example/halation/index.js') {
     //   debugger;
     // }
+    if (target._url === '/Users/my/my-project/useless-code-killer/example/routes-test/index.js' && other._url === '/Users/my/my-project/useless-code-killer/example/all.js')
     // filter self
     if (target._url === other._url) return false;
 

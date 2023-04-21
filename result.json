@@ -22,13 +22,16 @@
           "from": "alias"
         },
         {
-          "from": "./x.x.x.x.config/x.x.x.x.config"
+          "from": "./config/sentry.config"
         },
         {
           "from": "./halation/register"
         },
         {
           "from": "./a-all/a-all"
+        },
+        {
+          "from": "./routes-test"
         }
       ],
       "_export": [
