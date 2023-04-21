@@ -37,25 +37,36 @@ class Analysis {
       this.callback(memo);
       return;
     };
-
+    // if (url === '/Users/my/my-project/useless-code-killer/example/a-all/a-all.js') {
+    //   debugger;
+    // };
     body.forEach((item) => {
       const { type } = item;
       const isImport = this._import.includes(type);
-      if (isImport) return memo._import.push(this.importReportData(item));
+      if (isImport) memo._import.push(this.importReportData(item));
 
       const isExport = this._export.includes(type);
-      if (isExport) return memo._export.push(this.exportReporterData(item));
+      if (isExport) memo._export.push(this.exportReporterData(item));
+
+      // export * from 'xx';
+      if (type === 'ExportAllDeclaration') {
+        const { source } = item;
+        memo._import.push({ from: source.value });
+        memo._export.push({ type: 'default' });
+      };
     });
 
     const { loader } = this;
 
     if (!loader?.length) return callback(memo);
-
-    const newMemo = loader.reduce((cur) => {
-      return cur({ memo: pre, parse, fileCode });
-    }, memo);
-
-    callback(newMemo);
+    try {
+      const newMemo = loader.reduce((pre, cur) => {
+        return cur({ memo: pre, parse, fileCode });
+      }, memo);
+      callback(newMemo);
+    } catch {
+      return callback(newMemo);
+    };
   };
 
   importReportData = (item) => {

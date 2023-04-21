@@ -36,6 +36,9 @@ class Checker {
   };
 
   _ifImported = (target, other) => {
+    // if (target._url === '/Users/my/my-project/useless-code-killer/example/a-all/a-all.js' && other._url === '/Users/my/my-project/useless-code-killer/example/all.js') {
+    //   debugger;
+    // }
     // filter self
     if (target._url === other._url) return false;
 

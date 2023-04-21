@@ -2,7 +2,7 @@ const path = require('path');
 const { UselessCodeKiller, halationLoader, routesLoader } = require('./src/index.js');
 
 const killer = new UselessCodeKiller({
-  dir: path.resolve(__dirname, './'),
+  dir: path.resolve(__dirname, './example'),
   excludes: ['node_modules'],
   includes: ['.ts', '.tsx', '.js', '.jsx'],
   // 重命名
