@@ -21,7 +21,8 @@ class FileSystem {
     const { includes } = this;
     const hit = (f) => {
       if (!includes?.length) return true;
-      const fileMini = f.slice(-3, f.length);
+      const { type } = this._fileInfo(f.split('/'));
+      const fileMini = `.${type}`;
       return !!includes.find((mini) => {
         return mini === fileMini;
       })
@@ -35,6 +36,19 @@ class FileSystem {
       };
     });
   };
+
+  _fileInfo = (pathList) => {
+    const latest = pathList[pathList.length - 1];
+    const nameList = latest.split('.');
+    if (nameList?.length >= 3) {
+      const type = nameList.slice(-1);
+      const name = nameList.slice(0, nameList.length - 1).join('.');
+      return { name, type };
+    } else {
+      const [name, type] = latest.split('.');
+      return {name, type};
+    };
+  }
 };
 
 module.exports = FileSystem;
