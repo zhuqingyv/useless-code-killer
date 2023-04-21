@@ -39,6 +39,9 @@ class Checker {
     // if (target._url === '/Users/my/my-project/useless-code-killer/example/a-all/a-all.js' && other._url === '/Users/my/my-project/useless-code-killer/example/all.js') {
     //   debugger;
     // }
+    // if (target._url === '/Users/my/my-project/useless-code-killer/example/x.x.x.x.config/x.x.x.x.config.js' && other._url === '/Users/my/my-project/useless-code-killer/example/index.js') {
+    //   debugger;
+    // }
     // filter self
     if (target._url === other._url) return false;
 
@@ -123,8 +126,9 @@ class Checker {
   // 是否存在文件
   _hasMiniType = (pathList) => {
     const latest = pathList[pathList.length - 1];
-    const [name, type] = latest.split('.');
-    return !!type
+    const nameList = latest.split('.');
+    const type = nameList.slice(-1);
+    return ['js', 'ts', 'tsx', 'jsx'].includes(type)
   };
 
   // 文件信息
@@ -133,7 +137,7 @@ class Checker {
     const nameList = latest.split('.');
     if (nameList?.length >= 3) {
       const type = nameList.slice(-1);
-      const name = nameList.slice(0, nameList.length - 2).join('.');
+      const name = nameList.slice(0, nameList.length - 1).join('.');
       return { name, type };
     } else {
       const [name, type] = latest.split('.');
