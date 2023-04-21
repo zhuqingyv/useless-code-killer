@@ -42,6 +42,12 @@ class Checker {
     // if (target._url === '/Users/my/my-project/useless-code-killer/example/x.x.x.x.config/x.x.x.x.config.js' && other._url === '/Users/my/my-project/useless-code-killer/example/index.js') {
     //   debugger;
     // }
+    // if (target._url === '/Users/my/my-project/useless-code-killer/example/halation/register.js'&& other._url === '/Users/my/my-project/useless-code-killer/example/index.js') {
+    //   debugger;
+    // }
+    // if (target._url === '/Users/my/my-project/useless-code-killer/example/halation/halationState.ts' && other._url === '/Users/my/my-project/useless-code-killer/example/halation/index.js') {
+    //   debugger;
+    // }
     // filter self
     if (target._url === other._url) return false;
 

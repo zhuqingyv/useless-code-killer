@@ -1,44 +1,34 @@
 {
+  "entry": [
+    {
+      "_url": "/Users/my/my-project/useless-code-killer/example/deepDir/index.js",
+      "_import": [
+        {
+          "from": "../useFulDeep"
+        }
+      ],
+      "_export": [],
+      "_isEmpty": false
+    }
+  ],
   "useless": [
     {
-      "_url": "/Users/my/my-project/useless-code-killer/example/all.js",
+      "_url": "/Users/my/my-project/useless-code-killer/example/index.js",
       "_import": [
+        {
+          "from": "./useful"
+        },
+        {
+          "from": "alias"
+        },
+        {
+          "from": "./x.x.x.x.config/x.x.x.x.config"
+        },
+        {
+          "from": "./halation/register"
+        },
         {
           "from": "./a-all/a-all"
-        }
-      ],
-      "_export": [
-        {
-          "type": "default"
-        }
-      ],
-      "_isEmpty": false
-    },
-    {
-      "_url": "/Users/my/my-project/useless-code-killer/example/halation/register.js",
-      "_import": [
-        {
-          "from": "./model"
-        },
-        {
-          "from": "./index"
-        }
-      ],
-      "_export": [
-        {
-          "type": "default"
-        }
-      ],
-      "_isEmpty": false
-    },
-    {
-      "_url": "/Users/my/my-project/useless-code-killer/example/routes.config.js",
-      "_import": [
-        {
-          "from": "@xhs/protobuf-armor-tracker/tracker_template"
-        },
-        {
-          "from": "./routes-test"
         }
       ],
       "_export": [
@@ -56,34 +46,6 @@
           "type": "default"
         }
       ],
-      "_isEmpty": false
-    }
-  ],
-  "entry": [
-    {
-      "_url": "/Users/my/my-project/useless-code-killer/example/deepDir/index.js",
-      "_import": [
-        {
-          "from": "../useFulDeep"
-        }
-      ],
-      "_export": [],
-      "_isEmpty": false
-    },
-    {
-      "_url": "/Users/my/my-project/useless-code-killer/example/index.js",
-      "_import": [
-        {
-          "from": "./useful"
-        },
-        {
-          "from": "alias"
-        },
-        {
-          "from": "./x.x.x.x.config/x.x.x.x.config"
-        }
-      ],
-      "_export": [],
       "_isEmpty": false
     }
   ]
