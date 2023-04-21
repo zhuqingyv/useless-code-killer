@@ -17,7 +17,8 @@
     "@babel/parser": "^7.21.4",
     "path": "^0.12.7",
     "progress": "^2.0.3",
-    "rd": "^2.0.1"
+    "rd": "^2.0.1",
+    "table": "^6.8.1"
   },
   "devDependencies": {
     "webpack": "^5.80.0"

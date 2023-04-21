@@ -1,5 +1,5 @@
 const fs = require('fs');
-const path = require('path');
+let table = require("table");
 var ProgressBar = require('progress');
 const FileSystem = require('./FileSystem/index.js');
 const Analysis = require('./Analysis/index.js');
@@ -96,6 +96,10 @@ class UselessCodeKiller {
 
   end = () => {
     const value = this.reporter.output();
+    const uselessCount = this.reporter.data.useless.length;
+    const entryCount = this.reporter.data.entry.length;
+    console.info(`[useless]: ${uselessCount}`);
+    console.info(`[entry]: ${entryCount}`);
     const { outputDir } = this.options;
     fs.writeFileSync(outputDir, value);
   };
