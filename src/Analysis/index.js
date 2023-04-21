@@ -51,8 +51,8 @@ class Analysis {
 
     if (!loader?.length) return callback(memo);
 
-    const newMemo = loader.reduce((pre, cur) => {
-      return cur({ memo, parse, fileCode });
+    const newMemo = loader.reduce((cur) => {
+      return cur({ memo: pre, parse, fileCode });
     }, memo);
 
     callback(newMemo);
