@@ -130,8 +130,15 @@ class Checker {
   // 文件信息
   _fileInfo = (pathList) => {
     const latest = pathList[pathList.length - 1];
-    const [name, type] = latest.split('.');
-    return {name, type};
+    const nameList = latest.split('.');
+    if (nameList?.length >= 3) {
+      const type = nameList.slice(-1);
+      const name = nameList.slice(0, nameList.length - 2).join('.');
+      return { name, type };
+    } else {
+      const [name, type] = latest.split('.');
+      return {name, type};
+    };
   };
 
   _local = (pathList) => {
