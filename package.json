@@ -7,10 +7,6 @@
     "dev": "node ./demo.js"
   },
   "type": "commonjs",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/zhuqingyv/useless-code-killer.git"
-  },
   "author": "",
   "license": "ISC",
   "bugs": {
