@@ -73,7 +73,6 @@ class Checker {
 
   _ifLocalPathEqual = (target, other) => {
     // 如果层级就不一样，不相等
-    // if (target.length !== other.length) return false;
     const otherHasMinitype = this._hasMiniType(other);
     // TODO: 补全alias
     // 全名称情况

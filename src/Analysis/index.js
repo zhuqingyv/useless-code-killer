@@ -40,6 +40,9 @@ class Analysis {
     // if (url === '/Users/my/my-project/useless-code-killer/example/a-all/a-all.js') {
     //   debugger;
     // };
+    // if (url === '/Users/my/my-project/useless-code-killer/example/entry.js') {
+    //   debugger;
+    // }
     body.forEach((item) => {
       const { type } = item;
       const isImport = this._import.includes(type);

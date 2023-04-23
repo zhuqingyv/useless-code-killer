@@ -8,6 +8,7 @@ const Checker = require('./Check/index.js');
 const Reporter = require('./Reporter/index.js');
 const halationLoader = require('./HalationLoader/index.js');
 const routesLoader = require('./RouterLoader/index.js');
+const deepLoader = require('./DeepLoader/index');
 
 const defaultConfig = (options = {}) => {
   const _default = {
@@ -96,10 +97,10 @@ class UselessCodeKiller {
 
   end = () => {
     const value = this.reporter.output();
-    const uselessCount = this.reporter.data.useless.length;
-    const entryCount = this.reporter.data.entry.length;
-    console.info(`[useless]: ${uselessCount}`);
+    const uselessCount = this.reporter.data.useless?.length || 0;
+    const entryCount = this.reporter.data.entry?.length || 0;
     console.info(`[entry]: ${entryCount}`);
+    console.info(`[useless]: ${uselessCount}`);
     const { outputDir } = this.options;
     fs.writeFileSync(outputDir, value);
   };
@@ -109,6 +110,7 @@ module.exports = {
   UselessCodeKiller,
   halationLoader,
   routesLoader,
+  deepLoader,
 
   defaultConfig
 };

@@ -1,7 +1,8 @@
 const allowImportName = {
   require: true,
   import: true,
-  getComponent: true
+  getComponent: true,
+  getModel: true
 };
 
 const loader = ({memo, parse, fileCode}) => {
