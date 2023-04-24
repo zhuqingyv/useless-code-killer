@@ -62,7 +62,8 @@ const loader = ({memo, parse, fileCode}) => {
       if (type === 'ExportDefaultDeclaration') {
         const { declaration } = item;
         const { body } = declaration;
-        const { properties } = body;
+        const { properties = [] } = body;
+        // getComponent: () => ({})
         properties.forEach((_) => {
           try {
             const {key, value} = _;
@@ -77,7 +78,31 @@ const loader = ({memo, parse, fileCode}) => {
               });
             }
           } catch {}
-        })
+        });
+        // getComponent: () => { return {} }
+        if (body?.body?.length) {
+          body.body.forEach((_) => {
+            const { argument } = _;
+            if (argument) {
+              const { properties = [] } = argument;
+              properties.forEach((___) => {
+                const {key, value} = ___;
+                if (allowImportName[key.name]) {
+                  if (value?.body) {
+                    const {arguments} = value.body;
+                    if (arguments?.length) {
+                      arguments.forEach((____) => {
+                        memo._import.push({
+                          from: ____.value
+                        })
+                      })
+                    }
+                  }
+                }
+              })
+            }
+          });
+        }
       };
     });
   } catch {};

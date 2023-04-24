@@ -16,9 +16,6 @@ class Analysis {
   urlSetter = () => {};
 
   analysis = ({ url, callback }) => {
-    // 1.记录export语法
-    // 2.记录import语法
-    // 3.没有export语法记录进waiting列表
     const memo = {
       _url: url,
       _import: [],
@@ -28,7 +25,7 @@ class Analysis {
     const fileCode = fs.readFileSync(url, { encoding: 'utf-8' });
     const parse = babelParser.parse(fileCode, {
       sourceType: 'module',
-      plugins: ['jsx']
+      plugins: ['jsx', 'tsx', 'typescript'],
     });
     const { program: {body} } = parse;
     
@@ -37,26 +34,23 @@ class Analysis {
       this.callback(memo);
       return;
     };
-    // if (url === '/Users/my/my-project/useless-code-killer/example/a-all/a-all.js') {
-    //   debugger;
-    // };
-    // if (url === '/Users/my/my-project/useless-code-killer/example/entry.js') {
-    //   debugger;
-    // }
+
     body.forEach((item) => {
-      const { type } = item;
-      const isImport = this._import.includes(type);
-      if (isImport) memo._import.push(this.importReportData(item));
+      try {
+        const { type } = item;
+        const isImport = this._import.includes(type);
+        if (isImport) memo._import.push(this.importReportData(item));
 
-      const isExport = this._export.includes(type);
-      if (isExport) memo._export.push(this.exportReporterData(item));
+        const isExport = this._export.includes(type);
+        if (isExport) memo._export.push(this.exportReporterData(item));
 
-      // export * from 'xx';
-      if (type === 'ExportAllDeclaration') {
-        const { source } = item;
-        memo._import.push({ from: source.value });
-        memo._export.push({ type: 'default' });
-      };
+        // export * from 'xx';
+        if (type === 'ExportAllDeclaration') {
+          const { source } = item;
+          memo._import.push({ from: source.value });
+          memo._export.push({ type: 'default' });
+        };
+      } catch {}
     });
 
     const { loader } = this;

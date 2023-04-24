@@ -78,7 +78,9 @@ class UselessCodeKiller {
   filter = ({url}) => {
     try {
       this.analysis.analysis({ url, callback: this.record.push});
-    } catch {};
+    } catch (error) {
+      // debugger;
+    };
   };
 
   // 揪出无用文件

@@ -54,7 +54,7 @@ class Checker {
       } else {
         const root = otherLocalPath.concat();
         root.pop();
-        const otherFromLocalPath = root.concat(this._localPath('', _importItem.from));
+        const otherFromLocalPath = this._local(root.concat(this._localPath('', _importItem.from)));
         // 路径是否相等
         const isEqual = this._ifLocalPathEqual(targetLocalPath, this._local(otherFromLocalPath));
         return isEqual;
